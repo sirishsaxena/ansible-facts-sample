@@ -4,21 +4,19 @@ Presenter: Will Boyd
 
 ---
 
-**Ansible Facts** - Information about a host which ansible automatically gathers.
+Ansible playbooks can be a powerful way to perform a **series of tasks.**
 
-**Such as:**
-  - Linux Distribution / OS
-  - Hardware info
-  - A lot more...
+![Series](assets/img/series.png)
 
 ---
 
-One way to use facts:
-**To dynamically make decisions in your playbooks.**
+But sometimes you need something a little more complex, like the ability for a playbook to **make a decision** and act on it.
+
+![Series](assets/img/decision.png)
 
 ---
 
-**Scenario:** We want a playbook that can install apache on multiple hosts, some running Debian-based linux distros and some running CentOS-based distros.
+**Scenario:** A playbook that can install a package on hosts with different linux distributions.
 
 ---
 
@@ -34,7 +32,7 @@ One way to use facts:
 <td>
 <pre style="box-shadow: none;">
 - name: install apache
-  apt:
+  package:
     name: apache2
     state: latest
 </pre>
@@ -42,7 +40,7 @@ One way to use facts:
 <td>
 <pre style="box-shadow: none;">
 - name: install apache
-  yum:
+  package:
     name: httpd
     state: latest
 </pre>
@@ -52,53 +50,12 @@ One way to use facts:
 
 ---
 
-<table>
-<tr><td /><td>**Debian (apt)**</td><td>**CentOS (yum)**</td></tr>
-<tr>
-<td>**Ansible task**</td>
-<td>
-<pre style="box-shadow: none;">
-- name: install apache
-  apt:
-    name: apache2
-    state: latest
-</pre>
-</td>
-<td>
-<pre style="box-shadow: none;">
-- name: install apache
-  yum:
-    name: httpd
-    state: latest
-</pre>
-</td>
-</tr>
-</table>
+**Ansible Facts** - Information about a host which ansible automatically gathers. Facts can be referenced as variables within ansible.
 
----
-
-<table>
-<tr><td /><td>**Debian (apt)**</td><td>**CentOS (yum)**</td></tr>
-<tr>
-<td>**Ansible task**</td>
-<td>
-<pre style="box-shadow: none;">
-- name: install apache
-  **package:**
-    name: apache2
-    state: latest
-</pre>
-</td>
-<td>
-<pre style="box-shadow: none;">
-- name: install apache
-  **package:**
-    name: httpd
-    state: latest
-</pre>
-</td>
-</tr>
-</table>
+**Such as:**
+  - Linux Distribution / OS
+  - Hardware info
+  - A lot more...
 
 ---
 
